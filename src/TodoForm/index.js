@@ -29,7 +29,7 @@ function TodoForm() {
             <textarea 
                 value={newTodoValue}
                 onChange={onChange}
-                placeholder="Task name"
+                placeholder="Write a task name"
             />
             <div className="TodoForm-buttonContainer">
                 <button

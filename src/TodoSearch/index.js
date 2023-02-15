@@ -11,8 +11,8 @@ function TodoSearch() { /*{searchValue, setSearchValue}*/
 
     return (
         <input 
-            className="TodoSearchCss" 
-            placeholder="Text"
+            className="TodoSearchCss"
+            placeholder="Search a task by name"
             value={searchValue}
             onChange={onSearchValueChange}
         />
