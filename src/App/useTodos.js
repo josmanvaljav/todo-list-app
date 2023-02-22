@@ -1,22 +1,21 @@
 import React from "react";
 import { useLocalStorage } from "./useLocalStorage";
 
-const TodoContext = React.createContext();
-
-function TodoProvider(props) {
+function useTodos() {
     const [searchValue, setSearchValue] = React.useState("");
     const {
       item: todos, 
       saveItem: saveTodos,
       loading,
-      error
+      error,
+      synchronizeItems: synchronizeTodos
     } = useLocalStorage("TODO_V1", []);
     const [openModal, setOpenModal] = React.useState(false);
 
     // Counter management
     const completedTodos = todos.filter(todo => todo.completed).length;
     const totalTodos = todos.length;
-    // console.log("TodoContext - index.js (todos): ", todos); ///////////////////////////////
+
     // Task searcher
     let searchedTodos = [];
   
@@ -29,7 +28,7 @@ function TodoProvider(props) {
         return todoText.includes(searchText);
       });
     }
-  
+
     // Mark as a completed task function
     function markCompletedTask(taskText) {
       const todoIndex = todos.findIndex(todo => todo.text === taskText);
@@ -60,8 +59,7 @@ function TodoProvider(props) {
       saveTodos(newTodos);
     }
 
-    return (
-        <TodoContext.Provider value={{
+    return {
             loading,
             error,
             completedTodos,
@@ -73,11 +71,9 @@ function TodoProvider(props) {
             deleteTask,
             addTask,
             openModal, 
-            setOpenModal
-        }}>
-            {props.children}
-        </TodoContext.Provider>
-    );
+            setOpenModal,
+            synchronizeTodos
+    };
 }
 
-export { TodoContext, TodoProvider };
+export { useTodos };

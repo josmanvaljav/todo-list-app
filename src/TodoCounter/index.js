@@ -1,12 +1,13 @@
 import React from "react";
-import { TodoContext } from "../TodoContext";
 import "./TodoCounter.css";
 
-function TodoCounter() { /* Otra manera de traer los parámetros en ves de usar props */
-    const {completedTodos, totalTodos} = React.useContext(TodoContext);
-
+function TodoCounter({completedTodos, totalTodos, loading}) { 
     return (
-        <h2 className="TodoCounterCss">You have completed {completedTodos} of {totalTodos} TODOs</h2>
+        <h2 
+            className={`TodoCounterCss ${loading ? "TodoCounterCss--loading" : ""}`}
+        >
+            You have completed {completedTodos} of {totalTodos} TODOs
+        </h2>
     );
 }
 
